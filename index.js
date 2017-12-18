@@ -117,7 +117,7 @@ exports.returnPoem = () => {
                 }
 
 
-                for (p = 0; p < 3; p++) {
+                for (p = 0; p < 2; p++) {
                     let chosenStructure = randomArrayMember(arrayOfStructures);
 
                     for (k = 0; k < chosenStructure.length; k++) {
