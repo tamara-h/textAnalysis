@@ -119,7 +119,7 @@ exports.returnPoem = () => {
             }
 
 
-            for(p=0;p<4;p++){
+            for(p=0;p<3;p++){
                 let chosenStructure = randomArrayMember(arrayOfStructures);
 
                 for(k=0;k<chosenStructure.length;k++){
@@ -177,7 +177,7 @@ exports.returnPoem = () => {
                             break;
                         default:
                             // console.log("error");
-                            reject("error");
+                            // reject("error");
                     }
                 }
 
@@ -191,7 +191,7 @@ exports.returnPoem = () => {
 
 };
 
-// returnPoem()
+// exports.returnPoem()
 //     .then(result => {
 //         console.log(result)
 //     })
