@@ -19,6 +19,7 @@
   "homepage": "https://github.com/tamara-h/textAnalysis#readme",
   "dependencies": {
     "compromise": "^11.2.1",
-    "natural": "^0.5.4"
+    "natural": "^0.5.4",
+    "poemify": "^1.1.1"
   }
 }
