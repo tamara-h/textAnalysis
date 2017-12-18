@@ -1,4 +1,3 @@
-let natural = require('natural');
 let fs = require('fs');
 let nlp = require('compromise');
 let poem = require('poemify');
@@ -35,7 +34,7 @@ let currency = [];
 
 
 
-let returnPoem = function () {
+exports.returnPoem = () => {
 
     return new Promise((resolve, reject) => {
     fs.readFile('garlic.txt', 'utf8', function(err, contents) {
@@ -191,13 +190,13 @@ let returnPoem = function () {
 
 };
 
-returnPoem()
-    .then(result => {
-        console.log(result)
-    })
-    .catch(err => {
-        console.log(err)
-    });
+// exports.returnPoem()
+//     .then(result => {
+//         console.log(result)
+//     })
+//     .catch(err => {
+//         console.log(err)
+//     });
 
 
 function randomArrayMember (arr) {
