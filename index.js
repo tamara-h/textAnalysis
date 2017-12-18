@@ -38,8 +38,7 @@ let currency = [];
 exports.returnPoem = () => {
 
     return new Promise((resolve, reject) => {
-    fs.readFile('garlic.txt', 'utf8', function(err, contents) {
-
+    fs.readFile('./garlic.txt', 'utf8', function(err, contents) {
 
             let sentences = nlp(contents).sentences().out('array');
 
