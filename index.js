@@ -2,11 +2,7 @@ let fs = require('fs');
 let nlp = require('compromise');
 let poem = require('poemify');
 
-// let token = new natural.WordTokenizer();
-natural.PorterStemmer.attach();
-
 let finalSentence = "";
-
 
 //split text up regexp by full stops
 //for each sentence work out the structure
