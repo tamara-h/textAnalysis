@@ -35,156 +35,169 @@ let currency = [];
 
 
 
-fs.readFile('garlic.txt', 'utf8', function(err, contents) {
+let returnPoem = function () {
 
-    let sentences = nlp(contents).sentences().out('array');
+    return new Promise((resolve, reject) => {
+    fs.readFile('garlic.txt', 'utf8', function(err, contents) {
 
-    // console.log(nlp(sentences[0]).terms().data()[0].bestTag);
 
-    let numberOfSentences = sentences.length;
-    let arrayOfStructures = [];
+            let sentences = nlp(contents).sentences().out('array');
 
-    for(i=0; i<numberOfSentences ;i++){
-        //sentence length
-        let sentenceLength = nlp(sentences[i]).terms().data().length ;
+            let numberOfSentences = sentences.length;
+            let arrayOfStructures = [];
 
-        let structureArray = [];
-        for(j=0; j< sentenceLength; j++)
-        {
+            for(i=0; i<numberOfSentences ;i++){
+                //sentence length
+                let sentenceLength = nlp(sentences[i]).terms().data().length ;
 
-            let typeOfWord = nlp(sentences[i]).terms().data()[j].bestTag;
-            let actualWord = nlp(sentences[i]).terms().data()[j].text;
-            structureArray.push(typeOfWord);
+                let structureArray = [];
+                for(j=0; j< sentenceLength; j++)
+                {
+                    let typeOfWord = nlp(sentences[i]).terms().data()[j].bestTag;
+                    let actualWord = nlp(sentences[i]).terms().data()[j].text;
+                    structureArray.push(typeOfWord);
 
-            switch(typeOfWord){
-                case "Noun":
-                    nouns.push(actualWord);
-                    break;
-                case "Verb":
-                    verbs.push(actualWord);
-                    break;
-                case "Preposition":
-                    prepositions.push(actualWord);
-                    break;
-                case "Adjective":
-                    adjectives.push(actualWord);
-                    break;
-                case "Determiner":
-                    determiners.push(actualWord);
-                        break;
-                case "Conjunction":
-                    conjunctions.push(actualWord);
-                    break;
-                case "Negative":
-                    negatives.push(actualWord);
-                    break;
-                case "Date":
-                    dates.push(actualWord);
-                    break;
-                case "Value":
-                    values.push(actualWord);
-                    break;
-                case "VerbPhrase":
-                    verbPhrases.push(actualWord);
-                    break;
-                case "QuestionWord":
-                    questionWords.push(actualWord);
-                    break;
-                case "Adverb":
-                    adverbs.push(actualWord);
-                    break;
-                case "Condition":
-                    conditions.push(actualWord);
-                    break;
-                case "Expression":
-                    expressions.push(actualWord);
-                    break;
-                case "AdjectivePhrase":
-                    adjectivePhrases.push(actualWord);
-                    break;
-                case "Contraction":
-                    contractions.push(actualWord);
-                    break;
-                case "Currency":
-                    currency.push(actualWord);
-                    break;
-                default:
-                    //console.log("ERROR!!! UNCAUGHT TYPE: " + typeOfWord);
+                    switch(typeOfWord){
+                        case "Noun":
+                            nouns.push(actualWord);
+                            break;
+                        case "Verb":
+                            verbs.push(actualWord);
+                            break;
+                        case "Preposition":
+                            prepositions.push(actualWord);
+                            break;
+                        case "Adjective":
+                            adjectives.push(actualWord);
+                            break;
+                        case "Determiner":
+                            determiners.push(actualWord);
+                            break;
+                        case "Conjunction":
+                            conjunctions.push(actualWord);
+                            break;
+                        case "Negative":
+                            negatives.push(actualWord);
+                            break;
+                        case "Date":
+                            dates.push(actualWord);
+                            break;
+                        case "Value":
+                            values.push(actualWord);
+                            break;
+                        case "VerbPhrase":
+                            verbPhrases.push(actualWord);
+                            break;
+                        case "QuestionWord":
+                            questionWords.push(actualWord);
+                            break;
+                        case "Adverb":
+                            adverbs.push(actualWord);
+                            break;
+                        case "Condition":
+                            conditions.push(actualWord);
+                            break;
+                        case "Expression":
+                            expressions.push(actualWord);
+                            break;
+                        case "AdjectivePhrase":
+                            adjectivePhrases.push(actualWord);
+                            break;
+                        case "Contraction":
+                            contractions.push(actualWord);
+                            break;
+                        case "Currency":
+                            currency.push(actualWord);
+                            break;
+                        default:
+                        //console.log("ERROR!!! UNCAUGHT TYPE: " + typeOfWord);
+                    }
+                }
+
+                arrayOfStructures.push(structureArray);
+
             }
-        }
-
-        arrayOfStructures.push(structureArray);
-
-    }
 
 
-    for(p=0;p<4;p++){
-        let chosenStructure = randomArrayMember(arrayOfStructures);
+            for(p=0;p<4;p++){
+                let chosenStructure = randomArrayMember(arrayOfStructures);
 
-        for(k=0;k<chosenStructure.length;k++){
-            switch(chosenStructure[k]){
-                case "Noun":
-                    finalSentence = finalSentence +  randomArrayMember(nouns) + " ";
-                    break;
-                case "Verb":
-                    finalSentence = finalSentence +  randomArrayMember(verbs) + " ";
-                    break;
-                case "Preposition":
-                    finalSentence = finalSentence +  randomArrayMember(prepositions) + " ";
-                    break;
-                case "Adjective":
-                    finalSentence = finalSentence +  randomArrayMember(adjectives) + " ";
-                    break;
-                case "Determiner":
-                    finalSentence = finalSentence +  randomArrayMember(determiners) + " ";
-                    break;
-                case "Conjunction":
-                    finalSentence = finalSentence +  randomArrayMember(conjunctions) + " ";
-                    break;
-                case "Negative":
-                    finalSentence = finalSentence +  randomArrayMember(negatives) + " ";
-                    break;
-                case "Date":
-                    finalSentence = finalSentence +  randomArrayMember(dates) + " ";
-                    break;
-                case "Value":
-                    finalSentence = finalSentence +  randomArrayMember(values) + " ";
-                    break;
-                case "VerbPhrase":
-                    finalSentence = finalSentence +  randomArrayMember(verbPhrases) + " ";
-                    break;
-                case "QuestionWord":
-                    finalSentence = finalSentence +  randomArrayMember(questionWords) + " ";
-                    break;
-                case "Adverb":
-                    finalSentence = finalSentence +  randomArrayMember(adverbs) + " ";
-                    break;
-                case "Condition":
-                    finalSentence = finalSentence +  randomArrayMember(conditions) + " ";
-                    break;
-                case "Expression":
-                    finalSentence = finalSentence +  randomArrayMember(expressions) + " ";
-                    break;
-                case "AdjectivePhrase":
-                    finalSentence = finalSentence +  randomArrayMember(adjectivePhrases) + " ";
-                    break;
-                case "Contraction":
-                    finalSentence = finalSentence +  randomArrayMember(contractions) + " ";
-                    break;
-                case "Currency":
-                    finalSentence = finalSentence + randomArrayMember(currency) + " ";
-                    break;
-                default:
-                    console.log("error");
+                for(k=0;k<chosenStructure.length;k++){
+                    switch(chosenStructure[k]){
+                        case "Noun":
+                            finalSentence = finalSentence +  randomArrayMember(nouns) + " ";
+                            break;
+                        case "Verb":
+                            finalSentence = finalSentence +  randomArrayMember(verbs) + " ";
+                            break;
+                        case "Preposition":
+                            finalSentence = finalSentence +  randomArrayMember(prepositions) + " ";
+                            break;
+                        case "Adjective":
+                            finalSentence = finalSentence +  randomArrayMember(adjectives) + " ";
+                            break;
+                        case "Determiner":
+                            finalSentence = finalSentence +  randomArrayMember(determiners) + " ";
+                            break;
+                        case "Conjunction":
+                            finalSentence = finalSentence +  randomArrayMember(conjunctions) + " ";
+                            break;
+                        case "Negative":
+                            finalSentence = finalSentence +  randomArrayMember(negatives) + " ";
+                            break;
+                        case "Date":
+                            finalSentence = finalSentence +  randomArrayMember(dates) + " ";
+                            break;
+                        case "Value":
+                            finalSentence = finalSentence +  randomArrayMember(values) + " ";
+                            break;
+                        case "VerbPhrase":
+                            finalSentence = finalSentence +  randomArrayMember(verbPhrases) + " ";
+                            break;
+                        case "QuestionWord":
+                            finalSentence = finalSentence +  randomArrayMember(questionWords) + " ";
+                            break;
+                        case "Adverb":
+                            finalSentence = finalSentence +  randomArrayMember(adverbs) + " ";
+                            break;
+                        case "Condition":
+                            finalSentence = finalSentence +  randomArrayMember(conditions) + " ";
+                            break;
+                        case "Expression":
+                            finalSentence = finalSentence +  randomArrayMember(expressions) + " ";
+                            break;
+                        case "AdjectivePhrase":
+                            finalSentence = finalSentence +  randomArrayMember(adjectivePhrases) + " ";
+                            break;
+                        case "Contraction":
+                            finalSentence = finalSentence +  randomArrayMember(contractions) + " ";
+                            break;
+                        case "Currency":
+                            finalSentence = finalSentence + randomArrayMember(currency) + " ";
+                            break;
+                        default:
+                            // console.log("error");
+                            reject("error");
+                    }
+                }
+
             }
-        }
 
-    }
+            resolve(new poem(finalSentence).generate());
+        });
+
+    })
 
 
-    console.log((new poem(finalSentence)).generate());
+};
 
-});
+returnPoem()
+    .then(result => {
+        console.log(result)
+    })
+    .catch(err => {
+        console.log(err)
+    });
 
 
 function randomArrayMember (arr) {
